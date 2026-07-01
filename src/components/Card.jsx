@@ -16,7 +16,7 @@ const Card = (props) => {
         return;
       }
 
-       const response = await axios.patch(`http://localhost:5000/api/notes/update-notes/${props.id}`,
+       const response = await axios.patch(`https://backend-2-6oi4.onrender.com/api/notes/update-notes/${props.id}`,
         {
           updatedTitle,
           updatedDescription,
@@ -50,7 +50,7 @@ useEffect(() => {
 
   const deleteHandler = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/notes/delete-notes/${props.id}`);
+      await axios.delete(`https://backend-2-6oi4.onrender.com/api/notes/delete-notes/${props.id}`);
 
        if (props.noteData) {
          await props.noteData();
