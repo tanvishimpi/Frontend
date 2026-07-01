@@ -19,7 +19,7 @@ const App = () => {
     }
   };
 
-  const submitHandler = async (e) => {
+  const createHandler = async (e) => {
     e.preventDefault();
 
     try {
@@ -47,7 +47,7 @@ const App = () => {
 
   useEffect(() => {
     getData();
-  }, [submitHandler]);
+  }, [createHandler]);
 
 return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF9F8] via-pink-50 to-red-100 p-5">
@@ -91,7 +91,7 @@ return (
             </div>
 
             <form
-              onSubmit={submitHandler}
+              onSubmit={createHandler}
               className="flex flex-col gap-5"
             >
 
