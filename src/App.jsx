@@ -10,7 +10,7 @@ const App = () => {
   const getData = async () => {
     try {
       const response = await axios.get(
-        "https://backend-2-6oi4.onrender.com/api/notes/get-notes"
+        "http://localhost:5000/api/notes/get-notes"
       );
 
       setNotes(response.data.notes);
@@ -29,7 +29,7 @@ const App = () => {
       }
 
       await axios.post(
-        "https://backend-2-6oi4.onrender.com/api/notes/create-notes",
+        "http://localhost:5000/api/notes/create-notes",
         {
           title,
           description,
@@ -38,15 +38,16 @@ const App = () => {
 
       setTitle("");
       setDescription("");
-      await getData();
-    } catch (err) {
+
+     
+    } catch (err) { 
       console.log(err);
     }
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [createHandler]);
 
 return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF9F8] via-pink-50 to-red-100 p-5">

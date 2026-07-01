@@ -8,20 +8,19 @@ const Card = (props) => {
 
 
 
-  const submitHandler = async(e)=>{
-    e.preventDefault();
-
+  const submitHandler = async()=>{
+    
     try{
       if(updatedTitle==="" || updatedDescription===""){
         alert("Please fill this first")
         return;
       }
 
-       const response = await axios.patch(`https://backend-2-6oi4.onrender.com/api/notes/update-notes/${props.id}`,
+       const response = await axios.patch(`http://localhost:5000/api/notes/update-notes/${props.id}`,
         {
           updatedTitle,
-          updatedDescription
-
+          updatedDescription,
+          
         }
 
       )
@@ -42,16 +41,19 @@ const Card = (props) => {
 
   }
 
+useEffect(() => {
+    props.noteData();
+  },[]);
 
-
+  
 
 
   const deleteHandler = async () => {
     try {
-      await axios.delete(`https://backend-2-6oi4.onrender.com/api/notes/delete-notes/${props.id}`);
+      await axios.delete(`http://localhost:5000/api/notes/delete-notes/${props.id}`);
 
        if (props.noteData) {
-        props.noteData();
+         await props.noteData();
       }
       alert("Note deleted successfully");
 
@@ -62,28 +64,20 @@ const Card = (props) => {
     }
   };
 
-
-  
-useEffect(() => {
-    props.noteData();
-  },[submitHandler, deleteHandler]);
-
-
-
   return (
     <div className="w-full min-h-[260px] bg-pink-100 rounded-3xl shadow-lg p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
 
       {/* Buttons */}
       <div className="flex gap-2 mb-4">
-        <button
+       <button
           className="h-8 px-4 bg-red-200 rounded-xl text-sm hover:scale-105 transition"
-          onClick={()=>{
-            setIsOpen(
-              (prev)=>!prev
-            )
+          onClick={() => {
+            setUpdatedTitle(props.title);
+            setUpdatedDescription(props.description);
+            setIsOpen(true);
           }}
-        >
-          Edit
+          >
+            Edit
         </button>
 
 
@@ -109,7 +103,8 @@ useEffect(() => {
           {props.description}
         </p>
       </div>
-      {isOpen && (
+      {
+      isOpen && (
         <div className="h-full w-full gap-5 border-pink-200 border flex flex-col bg-purple-200">
           <div className="flex flex-col justify-around gap-5">
             <input
@@ -129,11 +124,13 @@ useEffect(() => {
           </div>
 
           <button
-            onClick={submitHandler}
-            className="mt-6 h-12 w-[80%] rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-pink-500/40 active:scale-95"
-          > 
-            Update Note
-          </button>
+              onClick={()=>{
+                submitHandler()
+              }}
+              className="mt-6 h-12 w-[80%] rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-pink-500/40 active:scale-95"
+            >
+              Update Note
+            </button>
         </div>
       )}
 
