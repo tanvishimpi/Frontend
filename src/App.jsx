@@ -47,7 +47,7 @@ const App = () => {
 
   useEffect(() => {
     getData();
-  }, [createHandler]);
+  }, []);
 
 return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF9F8] via-pink-50 to-red-100 p-5">
