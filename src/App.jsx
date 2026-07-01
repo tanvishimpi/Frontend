@@ -38,8 +38,7 @@ const App = () => {
 
       setTitle("");
       setDescription("");
-
-     
+      await getData();
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +46,7 @@ const App = () => {
 
   useEffect(() => {
     getData();
-  }, [createHandler]);
+  }, []);
 
 return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF9F8] via-pink-50 to-red-100 p-5">
@@ -186,7 +185,7 @@ return (
             title={elem.title}
             description={elem.description}
             id={elem._id}
-            noteData ={getData}
+            noteData = {getData}
             
           />
         ))}

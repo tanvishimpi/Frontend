@@ -42,9 +42,6 @@ const Card = (props) => {
 
   }
 
-useEffect(() => {
-    props.noteData();
-  },[]);
 
 
 
@@ -64,6 +61,14 @@ useEffect(() => {
       alert("Failed to delete note");
     }
   };
+
+
+  
+useEffect(() => {
+    props.noteData();
+  },[submitHandler, deleteHandler]);
+
+
 
   return (
     <div className="w-full min-h-[260px] bg-pink-100 rounded-3xl shadow-lg p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
